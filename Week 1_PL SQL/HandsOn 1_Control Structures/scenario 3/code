@@ -1,0 +1,46 @@
+-- Delete old table
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE loans';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+
+-- Create table
+CREATE TABLE loans (
+    loan_id NUMBER,
+    customer_name VARCHAR2(50),
+    due_date DATE
+);
+
+-- Insert data
+INSERT INTO loans VALUES (101,'John',SYSDATE+10);
+INSERT INTO loans VALUES (102,'Sita',SYSDATE+20);
+INSERT INTO loans VALUES (103,'Ravi',SYSDATE+45);
+
+COMMIT;
+
+
+-- Scenario 3 PL/SQL block
+BEGIN
+
+  FOR l IN
+  (
+    SELECT loan_id, customer_name, due_date
+    FROM loans
+    WHERE due_date BETWEEN SYSDATE AND SYSDATE + 30
+  )
+
+  LOOP
+
+    DBMS_OUTPUT.PUT_LINE(
+      'Reminder: Loan ID ' || l.loan_id ||
+      ' for ' || l.customer_name ||
+      ' is due on ' ||
+      TO_CHAR(l.due_date,'DD-MON-YYYY')
+    );
+
+  END LOOP;
+
+END;
+/
