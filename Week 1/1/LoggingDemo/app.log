@@ -1,0 +1,8 @@
+10:24:33 DEBUG com.example.AppenderExample - Debug Message
+10:24:33 INFO  com.example.AppenderExample - Info Message
+10:24:33 WARN  com.example.AppenderExample - Warning Message
+10:24:33 ERROR com.example.AppenderExample - Error Message
+10:28:44 INFO  com.example.ParameterizedLogging - Student name is Hasini and age is 20
+10:28:44 INFO  com.example.ParameterizedLogging - Course: Java, Marks: 95
+10:28:52 ERROR com.example.LoggingExample - This is an error message
+10:28:52 WARN  com.example.LoggingExample - This is a warning message
