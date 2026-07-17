@@ -1,0 +1,47 @@
+-- Delete old table
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE accounts';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+
+-- Create table
+CREATE TABLE accounts (
+    acct_id NUMBER,
+    balance NUMBER(10,2),
+    acct_type VARCHAR2(20)
+);
+
+-- Insert data
+INSERT INTO accounts VALUES (202,30000,'SAVINGS');
+INSERT INTO accounts VALUES (101,0,'SAVINGS');
+INSERT INTO accounts VALUES (102,3000,'SAVINGS');
+
+COMMIT;
+
+
+-- Stored procedure
+CREATE OR REPLACE PROCEDURE ProcessMonthlyInterest
+IS
+BEGIN
+
+  UPDATE accounts
+  SET balance = balance + (balance * 0.01)
+  WHERE acct_id = 202;
+
+  COMMIT;
+
+END;
+/
+
+
+-- Run procedure
+BEGIN
+  ProcessMonthlyInterest;
+END;
+/
+
+-- Show output
+SELECT acct_id, balance
+FROM accounts;
