@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <h1>Student Score Portal</h1>
-      <CalculateScore name="Revathi" school="MRECW" total={470} goal={5} />
+      <CalculateScore name="Hasini" school="MRECW" total={470} goal={5} />
     </div>
   );
 }
